@@ -6,7 +6,35 @@ div {
    padding: 30px;
 }
 
+html, body {
+   height: 100%;
+}
+
+body {
+   /* display: flex; */
+   background: rgb(149, 194, 215);
+}
+
+.main-content {
+   display: flex;
+   flex-direction: row;
+}
+
+.timer-container {
+   flex: 1 1 auto;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.tasks {
+   order: -1;
+}
+
 .task-list {
    height: 80%;
    list-style: none;
+}
+
+.timer {
 }
