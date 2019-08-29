@@ -1,0 +1,12 @@
+h1 {
+   text-align: center;
+}
+
+div {
+   padding: 30px;
+}
+
+.task-list {
+   height: 80%;
+   list-style: none;
+}
