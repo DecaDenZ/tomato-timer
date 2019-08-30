@@ -1,3 +1,13 @@
+a {
+}
+ul {
+   padding: 0px;
+}
+
+li {
+   padding: 10px;
+   text-align: center;
+}
 h1 {
    text-align: center;
 }
@@ -25,14 +35,25 @@ body {
    /* width: 100px; */
    order: -1;
    border: solid 1px;
+   justify-content: center;
 }
 
 .task-list {
    height: 70%;
    list-style: none;
+   overflow-y: auto;
+}
+
+.task-item {
+   border: solid 1px;
+}
+
+.add-task {
+   width: 100%;
 }
 
 .timer-container {
+   padding: 0 20px;
    flex: 1 1 auto;
    display: flex;
    justify-content: center;
@@ -40,8 +61,13 @@ body {
    flex-direction: column;
 }
 
+.active-task {
+   width: 80%;
+   border: solid 2px;
+}
+
 .timer-buttons {
-   padding: 0px;
+   padding-top: 20px;
 }
 
 .task-description {
