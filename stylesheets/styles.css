@@ -3,7 +3,7 @@ h1 {
 }
 
 div {
-   padding: 30px;
+   padding: 20px 30px;
 }
 
 html, body {
@@ -16,8 +16,20 @@ body {
 }
 
 .main-content {
+   margin: 20px;
    display: flex;
    flex-direction: row;
+}
+
+.tasks {
+   /* width: 100px; */
+   order: -1;
+   border: solid 1px;
+}
+
+.task-list {
+   height: 70%;
+   list-style: none;
 }
 
 .timer-container {
@@ -25,16 +37,14 @@ body {
    display: flex;
    justify-content: center;
    align-items: center;
+   flex-direction: column;
 }
 
-.tasks {
-   order: -1;
+.timer-buttons {
+   padding: 0px;
 }
 
-.task-list {
-   height: 80%;
-   list-style: none;
-}
-
-.timer {
+.task-description {
+   border: solid 1px;
+   width: 10%;
 }
