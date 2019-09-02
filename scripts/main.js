@@ -14,16 +14,24 @@ function addTask(){
 }
 
 function timer(time){
-   var countdouwn = new Date(time);
-   $(".timer").empty().add("<div>countdown</div>");
+   var countdown = new Date(time);
+   $(".timer").empty();
+   $(".timer").append("<div>" + countdown + "</div>");
+   countdown = countdown - 1000;
 }
 
 
 $(document).ready(function(){
    'use strict';
    $(".add-task").click(addTask);
-
-
-   setInterval (() => timer(time), 1000 );
+   console.log(time);
+   let timerId = setInterval ((time) => {   // вынести в отдельную функцию, когда начнет работать
+      console.log(typeof(time));
+      var countdown = new Date(time);
+      $(".timer").empty();
+      $(".timer").append("<div>" + countdown + "</div>");
+      time = time - 1000;
+   }, 1000 );
+   setTimeout(() => { clearInterval(timerId); alert('stop'); }, 5000);
 
 })
