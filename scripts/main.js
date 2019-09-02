@@ -28,9 +28,9 @@ function startTimer(){
 $(document).ready(function(){
    'use strict';
    $(".add-task").click(addTask);
-   let timerId = setInterval (timer(), 1000);
+   let timerId = setInterval (timer, 1000);
    setTimeout(() => { clearInterval(timerId); alert('stop'); }, 15000);
 
-   $("#button-start").click(startTimer);
+   // $("#button-start").click(startTimer);
 
 })
