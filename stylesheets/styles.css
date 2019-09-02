@@ -1,9 +1,6 @@
-a {
-}
 ul {
    padding: 0px;
 }
-
 li {
    padding: 10px;
    text-align: center;
@@ -11,15 +8,12 @@ li {
 h1 {
    text-align: center;
 }
-
 div {
    padding: 20px 30px;
 }
-
 html, body {
    height: 100%;
 }
-
 body {
    /* display: flex; */
    background: rgb(149, 194, 215);
@@ -31,27 +25,29 @@ body {
    flex-direction: row;
 }
 
+/* объект с отображением списка задач -----------------------------------------*/
 .tasks {
-   /* width: 100px; */
    order: -1;
    border: solid 1px;
    justify-content: center;
 }
 
 .task-list {
-   height: 70%;
+   height: 80%;
    list-style: none;
    overflow-y: auto;
 }
 
 .task-item {
+   width: 150px;
+   word-wrap: break-word;
    border: solid 1px;
 }
 
 .add-task {
    width: 100%;
 }
-
+/* контейнер внутри котрого будет находится таймер или какой-то другой счетчик */
 .timer-container {
    padding: 0 20px;
    flex: 1 1 auto;
@@ -61,6 +57,7 @@ body {
    flex-direction: column;
 }
 
+/*отображается активная задача в отдельном элементе --------------------------*/
 .active-task {
    width: 80%;
    border: solid 2px;
@@ -74,3 +71,14 @@ body {
    border: solid 1px;
    width: 10%;
 }
+
+/* медиазапрос для изменения формата странице на узких экранах
+/* нужно заново расписать оображения эл-та задачь, чтобы отображались по всей ширине экрана
+/* @media all and (max-width: 789px) {
+   .main-content {
+      flex-direction: column;
+   }
+   .tasks {
+    order: 2;
+   }
+} */
