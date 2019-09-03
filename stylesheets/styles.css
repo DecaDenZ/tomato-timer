@@ -15,7 +15,8 @@ html, body {
    height: 100%;
 }
 body {
-   /* display: flex; */
+   display: flex;
+   flex-direction: column;
    background: rgb(149, 194, 215);
 }
 
@@ -39,16 +40,18 @@ body {
 }
 
 .task-item {
+   border: solid 1px;
    width: 150px;
    word-wrap: break-word;
-   border: solid 1px;
 }
 
+/* кнопка для добавления задач, нужно выровнять по центру или по размеру с task-list и task-item */
 .add-task {
-   width: 100%;
+   width: 150px;
 }
 /* контейнер внутри котрого будет находится таймер или какой-то другой счетчик */
 .timer-container {
+   width: 70%;
    padding: 0 20px;
    flex: 1 1 auto;
    display: flex;
@@ -61,8 +64,10 @@ body {
 }
 /*отображается активная задача в отдельном элементе --------------------------*/
 .active-task {
-   width: 80%;
+   width: 70%;
+   overflow-y: auto;
    border: solid 2px;
+   word-wrap: break-word;
 }
 
 .timer-buttons {
