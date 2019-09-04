@@ -12,6 +12,7 @@ var activePhase = PHASE_STOP;
 var activeTask = 'Выберите задачу';
 var time = TIME_TO_WORK; // глобальная переменная, нужен глобальный доступ
 //чтобы была возможность сброса таймера из других функций
+var timerId;
 
 function chooseCurrentTask(e){
    $(".active-task h1").text(e.currentTarget.innerHTML);
@@ -20,8 +21,6 @@ function chooseCurrentTask(e){
 
 function addTask(){
    var newTask = prompt('Введите задачу');
-   // var taskItem = $(".task-item:last").clone().text(newTask);
-
    $(".task-list").append("<li class='task-item'></li>");
    $(".task-item:last").text(newTask);
    $(".task-item").on('click', (e) => chooseCurrentTask(e));
@@ -30,24 +29,29 @@ function addTask(){
 function timer(){
    var countdown = new Date(time);
    $(".timer").empty();
-   $(".timer").append("<div>"
-        + countdown.getMinutes()
-        + " : "
-        + countdown.getSeconds()
-        + "</div>");
-   time = time - 1000;
+   $(".timer").append("<div>" + countdown.getMinutes()
+                              + " : "
+                              + countdown.getSeconds()
+                              + "</div>");
+   if (time === 0 && activePhase === PHASE_WORK) {
+      alert('Отдохните немного');
+      time = TIME_TO_LITTLE_REST;
+      activePhase = PHASE_REST;
+   }
+   time -= 1000;
 }
 
 function startTimer(){
    activePhase = PHASE_WORK;
-  let timerId = setInterval (timer, 1000);
-  setTimeout(() => { clearInterval(timerId); alert('stop'); }, 15000);
+   timerId = setInterval (timer, 1000);
+
+   // setTimeout(() => { clearInterval(timerId); alert('stop'); }, 15000);
 }
 
 function stopTimer(){
    time = TIME_TO_WORK;
    activePhase = PHASE_STOP;
-   console.log(time);
+   clearInterval(timerId);
 }
 
 
@@ -56,5 +60,4 @@ $(document).ready(function(){
    $(".add-task").click(addTask);
    $("#button-start").click(startTimer);
    $("#button-stop").click(stopTimer);
-   $(".task-item").on('click', (e) => chooseCurrentTask(e));
 })
