@@ -13,6 +13,7 @@ var activeTask = 'Выберите задачу';
 var time = TIME_TO_WORK; // глобальная переменная, нужен глобальный доступ
 //чтобы была возможность сброса таймера из других функций
 var timerId;
+var counter = 0; // отсчет количества выполненных помидоров
 
 function chooseCurrentTask(e){
    $(".active-task h1").text(e.currentTarget.innerHTML);
@@ -28,7 +29,7 @@ function addTask(){
 
 function startTimer(){
   activePhase = PHASE_WORK;
-  var counter = 0;
+  counter = 0;
   timerId = setInterval (timer, 1000);
 }
 function timer(){
@@ -39,13 +40,15 @@ function timer(){
                               + " : "
                               + countdown.getSeconds()
                               + "</div>");
-   if (time === 0 && activePhase === PHASE_WORK) {
+   if (time === 0){
+     if(activePhase === PHASE_WORK) {
       alert('Отдохните немного');
       time = TIME_TO_LITTLE_REST;
       activePhase = PHASE_REST;
       counter++;
    }
    time -= 1000;
+ }
 }
 
 
