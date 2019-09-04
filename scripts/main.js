@@ -26,7 +26,13 @@ function addTask(){
    $(".task-item").on('click', (e) => chooseCurrentTask(e));
 }
 
+function startTimer(){
+  activePhase = PHASE_WORK;
+  var counter = 0;
+  timerId = setInterval (timer, 1000);
+}
 function timer(){
+   console.log(counter);
    var countdown = new Date(time);
    $(".timer").empty();
    $(".timer").append("<div>" + countdown.getMinutes()
@@ -37,16 +43,11 @@ function timer(){
       alert('Отдохните немного');
       time = TIME_TO_LITTLE_REST;
       activePhase = PHASE_REST;
+      counter++;
    }
    time -= 1000;
 }
 
-function startTimer(){
-   activePhase = PHASE_WORK;
-   timerId = setInterval (timer, 1000);
-
-   // setTimeout(() => { clearInterval(timerId); alert('stop'); }, 15000);
-}
 
 function stopTimer(){
    time = TIME_TO_WORK;
