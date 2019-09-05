@@ -1,12 +1,21 @@
 // разделить работу приложения на 3 фазы
 // фааза выбора задачи, рабочая фаза = 25 минут работы четчика,
 //фаза отдыха = 5 - 20 минут работы счетчика
+<<<<<<< HEAD
 // const TIME_TO_WORK = 1499000; //25 минут в мс
 const TIME_TO_WORK = 14000;
 // const TIME_TO_LITTLE_REST = 300000; // 5 минут в милисекундах
 const TIME_TO_LITTLE_REST = 15000;
 // const TIME_TO_BIG_REST = 900000; // 15 минут в мс
 const TIME_TO_BIG_REST = 15000;
+=======
+const TIME_TO_WORK = 14000;
+const TIME_TO_LITTLE_REST = 15000;
+const TIME_TO_BIG_REST = 15000;
+// const TIME_TO_WORK = 1499000; //25 минут в мс
+// const TIME_TO_LITTLE_REST = 300000; // 5 минут в милисекундах
+// const TIME_TO_BIG_REST = 900000; // 15 минут в мс
+>>>>>>> 9371985ae87436aa698f66814b8be585b2c73c4e
 const PHASE_REST = 'rest';
 const PHASE_WORK = 'work';
 const PHASE_STOP = 'stop';
@@ -19,24 +28,26 @@ var timerId;
 var counter = 1; // отсчет количества выполненных помидоров
 
 function chooseCurrentTask(e) {
-  $(".active-task h1").text(e.currentTarget.innerHTML);
-  stopTimer();
+   $(".active-task h1").text(e.currentTarget.innerHTML);
+   stopTimer();
 }
 
 function addTask() {
-  var newTask = prompt('Введите задачу');
-  $(".task-list").append("<li class='task-item'></li>");
-  $(".task-item:last").text(newTask);
-  $(".task-item").on('click', (e) => chooseCurrentTask(e));
+   var newTask = prompt('Введите задачу');
+
+   $(".task-item:last").clone(true).appendTo(".task-list");
+   $(".task-item:last").text(newTask);  // меняет все содержимое копируемого эл-та, нужно копировать чтобы оставался спан
+   $(".task-item").on('click', (e) => chooseCurrentTask(e));
 }
 
 function startTimer() {
-  activePhase = PHASE_WORK;
-  counter = 1;
-  timerId = setInterval(timer, 1000);
+   activePhase = PHASE_WORK;
+   counter = 1;
+   timerId = setInterval(timer, 1000);
 }
 
 function timer() {
+<<<<<<< HEAD
 console.log(counter);
   var countdown = new Date(time);
   $(".timer").empty();
@@ -59,20 +70,45 @@ console.log(counter);
         alert('Вернитесь к задаче');
         time = TIME_TO_WORK;
         activePhase = PHASE_WORK;
+=======
+   var countdown = new Date(time);
+   $(".timer").empty();
+   $(".timer").append("<div>" + countdown.getMinutes() +
+      " : " + countdown.getSeconds() + "</div>");
+
+   if (time === 0) {
+      if (activePhase === PHASE_WORK) {
+         if (counter < 4) {
+            alert('Отдохните немного');
+            activePhase = PHASE_REST;
+            time = TIME_TO_LITTLE_REST;
+            counter++;
+         } else {
+            alert('Одохните побольше');
+            time = TIME_TO_BIG_REST;
+            counter = 1;
+         }
+      } else {
+         alert('Вернитесь к задаче');
+         time = TIME_TO_WORK;
+         activePhase = PHASE_WORK;
+>>>>>>> 9371985ae87436aa698f66814b8be585b2c73c4e
       }
-    }
-  time -= 1000;
+   } else {
+      time -= 1000;
+   }
+
 }
 
 function stopTimer() {
-  time = TIME_TO_WORK;
-  activePhase = PHASE_STOP;
-  clearInterval(timerId);
+   time = TIME_TO_WORK;
+   activePhase = PHASE_STOP;
+   clearInterval(timerId);
 }
 
 $(document).ready(function() {
-  'use strict';
-  $(".add-task").click(addTask);
-  $("#button-start").click(startTimer);
-  $("#button-stop").click(stopTimer);
+   'use strict';
+   $(".add-task").click(addTask);
+   $("#button-start").click(startTimer);
+   $("#button-stop").click(stopTimer);
 })
