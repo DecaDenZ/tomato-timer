@@ -56,6 +56,13 @@ body {
    width: 200px;
 }
 
+.active-task-item{
+   border: solid 3px;
+   border-color: rgb( 255, 0, 0);
+   border-color: rgba( 255, 0, 0, 0.5);
+   width: 200px;
+}
+
 /* кнопка для добавления задач, нужно выровнять по центру или по размеру с task-list и task-item */
 .add-task {
    width: 150px;

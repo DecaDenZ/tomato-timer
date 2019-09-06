@@ -1,21 +1,13 @@
 // разделить работу приложения на 3 фазы
 // фааза выбора задачи, рабочая фаза = 25 минут работы четчика,
 //фаза отдыха = 5 - 20 минут работы счетчика
-<<<<<<< HEAD
-// const TIME_TO_WORK = 1499000; //25 минут в мс
-const TIME_TO_WORK = 14000;
-// const TIME_TO_LITTLE_REST = 300000; // 5 минут в милисекундах
-const TIME_TO_LITTLE_REST = 15000;
-// const TIME_TO_BIG_REST = 900000; // 15 минут в мс
-const TIME_TO_BIG_REST = 15000;
-=======
+'use strict';
 const TIME_TO_WORK = 14000;
 const TIME_TO_LITTLE_REST = 15000;
 const TIME_TO_BIG_REST = 15000;
 // const TIME_TO_WORK = 1499000; //25 минут в мс
 // const TIME_TO_LITTLE_REST = 300000; // 5 минут в милисекундах
 // const TIME_TO_BIG_REST = 900000; // 15 минут в мс
->>>>>>> 9371985ae87436aa698f66814b8be585b2c73c4e
 const PHASE_REST = 'rest';
 const PHASE_WORK = 'work';
 const PHASE_STOP = 'stop';
@@ -27,17 +19,21 @@ var time = TIME_TO_WORK; // глобальная переменная, нуже�
 var timerId;
 var counter = 1; // отсчет количества выполненных помидоров
 
-function chooseCurrentTask(e) {
-   $(".active-task h1").text(e.currentTarget.innerHTML);
-   stopTimer();
+function chooseActiveTask(e) {
+   $(".active-task-item").removeClass("active-task-item").addClass("task-item");
+   var newActiveTask = e.currentTarget.innerHTML.slice(0, -54);
+   e.currentTarget.className = "active-task-item";
+   if (newActiveTask !== activeTask) {
+      $(".active-task h1").text(newActiveTask);
+      activeTask = newActiveTask;
+      stopTimer();
+   }
 }
 
 function addTask() {
    var newTask = prompt('Введите задачу');
-
    $(".task-item:last").clone(true).appendTo(".task-list");
-   $(".task-item:last").text(newTask);  // меняет все содержимое копируемого эл-та, нужно копировать чтобы оставался спан
-   $(".task-item").on('click', (e) => chooseCurrentTask(e));
+   $(".task-item:last").html(newTask + ` <span class="badge badge-primary badge-pill">0</span>`);
 }
 
 function startTimer() {
@@ -47,30 +43,6 @@ function startTimer() {
 }
 
 function timer() {
-<<<<<<< HEAD
-console.log(counter);
-  var countdown = new Date(time);
-  $(".timer").empty();
-  $(".timer").append("<div>" + countdown.getMinutes()
-    + " : " + countdown.getSeconds() + "</div>");
-
-  if (time === 0) {
-    if (activePhase === PHASE_WORK) {
-      if (counter < 4){
-         alert('Отдохните немного');
-         activePhase = PHASE_REST;
-         time = TIME_TO_LITTLE_REST;
-         counter++;
-      } else {
-         alert('Одохните побольше');
-         time = TIME_TO_BIG_REST;
-         counter = 1;
-      }
-    } else {
-        alert('Вернитесь к задаче');
-        time = TIME_TO_WORK;
-        activePhase = PHASE_WORK;
-=======
    var countdown = new Date(time);
    $(".timer").empty();
    $(".timer").append("<div>" + countdown.getMinutes() +
@@ -78,6 +50,7 @@ console.log(counter);
 
    if (time === 0) {
       if (activePhase === PHASE_WORK) {
+         addTomato();
          if (counter < 4) {
             alert('Отдохните немного');
             activePhase = PHASE_REST;
@@ -92,7 +65,6 @@ console.log(counter);
          alert('Вернитесь к задаче');
          time = TIME_TO_WORK;
          activePhase = PHASE_WORK;
->>>>>>> 9371985ae87436aa698f66814b8be585b2c73c4e
       }
    } else {
       time -= 1000;
@@ -106,9 +78,17 @@ function stopTimer() {
    clearInterval(timerId);
 }
 
+function addTomato(){
+   var tomatoes = $(".active-task-item .badge badge-primary badge-pill").text();
+   tomatoes++;
+   $(".active-task-item .badge badge-primary badge-pill").text(tomatoes);
+   // tomatoes.text(+tomatoes.text()+1);
+}
+
 $(document).ready(function() {
    'use strict';
    $(".add-task").click(addTask);
    $("#button-start").click(startTimer);
    $("#button-stop").click(stopTimer);
+   $(".task-item").on('click', (e) => chooseActiveTask(e));
 })
