@@ -79,9 +79,9 @@ function stopTimer() {
 }
 
 function addTomato(){
-   var tomatoes = $(".active-task-item .badge badge-primary badge-pill").text();
-   tomatoes++;
-   $(".active-task-item .badge badge-primary badge-pill").text(tomatoes);
+   var tomatoes = $(".active-task-item span").text();
+   $(".active-task-item span").text(++tomatoes);
+   // tomatoes.text(++tomatoes.text());
    // tomatoes.text(+tomatoes.text()+1);
 }
 
