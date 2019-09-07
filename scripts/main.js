@@ -11,94 +11,100 @@ const TIME_TO_BIG_REST = 15000;
 const PHASE_REST = 'rest';
 const PHASE_WORK = 'work';
 const PHASE_STOP = 'stop';
+const DEFAULT_TASK = 'Выберите задачу'
 
 var activePhase = PHASE_STOP;
-var activeTask = 'Выберите задачу';
+var activeTask = DEFAULT_TASK;
 var time = TIME_TO_WORK; // глобальная переменная, нужен глобальный доступ
 //чтобы была возможность сброса таймера из других функций
 var timerId;
 var counter = 1; // отсчет количества выполненных помидоров
 
 function chooseActiveTask(e) {
-   $(".active-task-item").removeClass("active-task-item").addClass("task-item");
-   var newActiveTask = e.currentTarget.innerHTML.slice(0, -54);
-   e.currentTarget.className = "active-task-item";
-   if (newActiveTask !== activeTask) {
-      $(".active-task h1").text(newActiveTask);
-      activeTask = newActiveTask;
-      stopTimer();
-   }
+  $(".active-task-item").removeClass("active-task-item").addClass("task-item");
+  var newActiveTask = e.currentTarget.innerHTML.slice(0, -54);
+  e.currentTarget.className = "active-task-item";
+  if (newActiveTask !== activeTask) {
+    $(".active-task h1").text(newActiveTask);
+    activeTask = newActiveTask;
+    stopTimer();
+  }
 }
 
 function addTask() {
-   var newTask = prompt('Введите задачу');
-   $(".task-item:last").clone(true).appendTo(".task-list");
-   $(".task-item:last").html(newTask + ` <span class="badge badge-primary badge-pill">0</span>`);
+  var newTask = prompt('Введите задачу');
+  $(".task-item:last").clone(true).appendTo(".task-list");
+  $(".task-item:last").html(newTask + ` <span class="badge badge-primary badge-pill">0</span>`);
 }
 
 
-function deleteTask(e){
-    e.currentTarget.remove;
+function deleteTask(e) {
+  e.currentTarget.remove;
 }
 
-function endTask(){
-  activeTask = 'Выберите задачу';
+function endTask() {
+  activeTask = DEFAULT_TASK;
   $(".active-task h1").text(activeTask);
   $(".active-task-item").remove();
 }
 
 function startTimer() {
-   activePhase = PHASE_WORK;
-   counter = 1;
-   timerId = setInterval(timer, 1000);
+  if (activeTask === DEFAULT_TASK){
+    alert('Сначала выберите задачу, которую будете выполнять');
+    return
+  }
+  else {
+    activePhase = PHASE_WORK;
+    counter = 1;
+    timerId = setInterval(timer, 1000);
+  }
 }
 
 function timer() {
-   var countdown = new Date(time);
-   $(".timer").empty();
-   $(".timer").append("<div>" + countdown.getMinutes() +
-      " : " + countdown.getSeconds() + "</div>");
+  var countdown = new Date(time);
+  $(".timer").empty();
+  $(".timer").append("<div>" + countdown.getMinutes() +
+    " : " + countdown.getSeconds() + "</div>");
 
-   if (time === 0) {
-      if (activePhase === PHASE_WORK) {
-         addTomato();
-         if (counter < 4) {
-            alert('Отдохните немного');
-            activePhase = PHASE_REST;
-            time = TIME_TO_LITTLE_REST;
-            counter++;
-         } else {
-            alert('Одохните побольше');
-            time = TIME_TO_BIG_REST;
-            counter = 1;
-         }
+  if (time === 0) {
+    if (activePhase === PHASE_WORK) {
+      addTomato();
+      if (counter < 4) {
+        alert('Отдохните немного');
+        activePhase = PHASE_REST;
+        time = TIME_TO_LITTLE_REST;
+        counter++;
       } else {
-         alert('Вернитесь к задаче');
-         time = TIME_TO_WORK;
-         activePhase = PHASE_WORK;
+        alert('Одохните побольше');
+        time = TIME_TO_BIG_REST;
+        counter = 1;
       }
-   } else {
-      time -= 1000;
-   }
+    } else {
+      alert('Вернитесь к задаче');
+      time = TIME_TO_WORK;
+      activePhase = PHASE_WORK;
+    }
+  } else {
+    time -= 1000;
+  }
 
 }
 
 function stopTimer() {
-   time = TIME_TO_WORK;
-   activePhase = PHASE_STOP;
-   clearInterval(timerId);
+  time = TIME_TO_WORK;
+  activePhase = PHASE_STOP;
+  clearInterval(timerId);
 }
 
-function addTomato(){
-   var tomatoes = $(".active-task-item span").text();
-   $(".active-task-item span").text(++tomatoes);
+function addTomato() {
+  var tomatoes = $(".active-task-item span").text();
+  $(".active-task-item span").text(++tomatoes);
 }
 
 $(document).ready(function() {
-   $(".add-task").click(addTask);
-   $("#button-start").click(startTimer);
-   $("#button-stop").click(stopTimer);
-   $("#button-end").click(endTask);
-   $(".task-item").on('click', (e) => chooseActiveTask(e));
-
+  $(".add-task").click(addTask);
+  $("#button-start").click(startTimer);
+  $("#button-stop").click(stopTimer);
+  $("#button-end").click(endTask);
+  $(".task-item").on('click', (e) => chooseActiveTask(e));
 })
