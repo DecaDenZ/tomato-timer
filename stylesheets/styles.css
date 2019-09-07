@@ -28,13 +28,14 @@ body {
 
 /* объект с отображением списка задач -----------------------------------------*/
 .tasks {
+  height: 90%;
    order: -1;
    border: solid 1px;
    justify-content: center;
 }
 
 .task-list {
-   height: 90%;
+   height: 85%;
    list-style: none;
    overflow-y: auto;
 }
@@ -63,9 +64,10 @@ body {
    width: 200px;
 }
 
-/* кнопка для добавления задач, нужно выровнять по центру или по размеру с task-list и task-item */
+/* кнопка для добавления задач */
 .add-task {
-   width: 150px;
+   width: 200px;
+
 }
 /* контейнер внутри котрого будет находится таймер или какой-то другой счетчик */
 .timer-container {
@@ -78,8 +80,6 @@ body {
    flex-direction: column;
 }
 
-.timer {
-}
 /*отображается активная задача в отдельном элементе --------------------------*/
 .active-task {
    width: 70%;
@@ -93,7 +93,7 @@ body {
 }
 
 .task-description {
-   border: solid 1px;
+   /* border: solid 1px; */
    width: 10%;
 }
 

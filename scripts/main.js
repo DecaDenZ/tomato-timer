@@ -36,6 +36,17 @@ function addTask() {
    $(".task-item:last").html(newTask + ` <span class="badge badge-primary badge-pill">0</span>`);
 }
 
+
+function deleteTask(e){
+    e.currentTarget.remove;
+}
+
+function endTask(){
+  activeTask = 'Выберите задачу';
+  $(".active-task h1").text(activeTask);
+  $(".active-task-item").remove();
+}
+
 function startTimer() {
    activePhase = PHASE_WORK;
    counter = 1;
@@ -81,14 +92,13 @@ function stopTimer() {
 function addTomato(){
    var tomatoes = $(".active-task-item span").text();
    $(".active-task-item span").text(++tomatoes);
-   // tomatoes.text(++tomatoes.text());
-   // tomatoes.text(+tomatoes.text()+1);
 }
 
 $(document).ready(function() {
-   'use strict';
    $(".add-task").click(addTask);
    $("#button-start").click(startTimer);
    $("#button-stop").click(stopTimer);
+   $("#button-end").click(endTask);
    $(".task-item").on('click', (e) => chooseActiveTask(e));
+
 })
