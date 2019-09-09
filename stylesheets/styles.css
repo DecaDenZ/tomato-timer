@@ -57,6 +57,10 @@ body {
    width: 200px;
 }
 
+.close-task {
+   padding: 0px;
+   margin: 0px;
+}
 .active-task-item{
    border: solid 3px;
    border-color: rgb( 255, 0, 0);

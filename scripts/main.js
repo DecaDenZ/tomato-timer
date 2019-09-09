@@ -22,7 +22,8 @@ var counter = 1; // отсчет количества выполненных п�
 
 function chooseActiveTask(e) {
   $(".active-task-item").removeClass("active-task-item").addClass("task-item");
-  var newActiveTask = e.currentTarget.innerHTML.slice(0, -54);
+  var newActiveTask = e.currentTarget.innerHTML;
+  console.log(newActiveTask);
   e.currentTarget.className = "active-task-item";
   if (newActiveTask !== activeTask) {
     $(".active-task h1").text(newActiveTask);
@@ -34,7 +35,7 @@ function chooseActiveTask(e) {
 function addTask() {
   var newTask = prompt('Введите задачу');
   $(".task-item:last").clone(true).appendTo(".task-list");
-  $(".task-item:last").html(newTask + ` <span class="badge badge-primary badge-pill">0</span>`);
+  $(".task-item:last").html(newTask + ` <span class="badge badge-primary badge-pill">0</span><div class="close-task">Х</div>`);
 }
 
 
@@ -107,4 +108,5 @@ $(document).ready(function() {
   $("#button-stop").click(stopTimer);
   $("#button-end").click(endTask);
   $(".task-item").on('click', (e) => chooseActiveTask(e));
+  $(".close-task").on('click', (e) => deleteTask(e));
 })
