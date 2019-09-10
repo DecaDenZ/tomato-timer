@@ -1,13 +1,13 @@
 // разделить работу приложения на 3 фазы
-// фааза выбора задачи, рабочая фаза = 25 минут работы четчика,
+// фаза выбора задачи, рабочая фаза = 25 минут работы cчетчика,
 //фаза отдыха = 5 - 20 минут работы счетчика
 'use strict';
-const TIME_TO_WORK = 14000;
-const TIME_TO_LITTLE_REST = 15000;
-const TIME_TO_BIG_REST = 15000;
-// const TIME_TO_WORK = 1499000; //25 минут в мс
-// const TIME_TO_LITTLE_REST = 300000; // 5 минут в милисекундах
-// const TIME_TO_BIG_REST = 900000; // 15 минут в мс
+// const TIME_TO_WORK = 14000;
+// const TIME_TO_LITTLE_REST = 15000;
+// const TIME_TO_BIG_REST = 15000;
+const TIME_TO_WORK = 1500000; //25 минут в мс
+const TIME_TO_LITTLE_REST = 300000; // 5 минут в милисекундах
+const TIME_TO_BIG_REST = 900000; // 15 минут в мс
 const PHASE_REST = 'rest';
 const PHASE_WORK = 'work';
 const PHASE_STOP = 'stop';
@@ -54,12 +54,21 @@ function deleteTask(e) {
       stopTimer();
    }
    task.remove();
+   setTime(TIME_TO_WORK);
 }
 
 function endTask() {
    activeTask = DEFAULT_TASK;
    $(".active-task h1").text(activeTask);
    $(".active-task-item").remove();
+   setTime(TIME_TO_WORK);
+}
+
+function setTime(time){
+  var countdown = new Date(time);
+  $(".timer")
+     .html("<div>" + countdown.getMinutes() +
+        ":" + countdown.getSeconds() + "</div>");
 }
 
 function startTimer() {
@@ -74,11 +83,7 @@ function startTimer() {
 }
 
 function timer() {
-   var countdown = new Date(time);
-   $(".timer").empty();
-   $(".timer")
-      .append("<div>" + countdown.getMinutes() +
-         " : " + countdown.getSeconds() + "</div>");
+   setTime(time);
 
    if (time === 0) {
       if (activePhase === PHASE_WORK) {
@@ -108,6 +113,7 @@ function stopTimer() {
    time = TIME_TO_WORK;
    activePhase = PHASE_STOP;
    clearInterval(timerId);
+   setTime(TIME_TO_WORK);
 }
 
 function addTomato() {

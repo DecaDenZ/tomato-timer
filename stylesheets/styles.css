@@ -56,13 +56,14 @@ body {
    border-color: rgb( 255, 0, 0);
    border-color: rgba( 255, 0, 0, 0.5);
    width: 200px;
+
 }
 
 .close-task {
    padding: 0;
    margin: 0;
    position:absolute;
-   top:-9px;
+   top:-7px;
    right:1px;
    cursor: pointer;
    color:#e84343;
@@ -72,7 +73,9 @@ body {
    border-color: rgb( 255, 0, 0);
    border-color: rgba( 255, 0, 0, 0.5);
    width: 200px;
-   position: relative
+   position: relative;
+   word-wrap: break-word;
+
 }
 
 /* кнопка для добавления задач */
@@ -91,9 +94,14 @@ body {
    flex-direction: column;
 }
 
+.timer {
+  font-size: 80px;
+}
+
 /*отображается активная задача в отдельном элементе --------------------------*/
 .active-task {
    width: 70%;
+   max-height: 200px;
    overflow-y: auto;
    border: solid 2px;
    word-wrap: break-word;
