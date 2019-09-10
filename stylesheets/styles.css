@@ -44,6 +44,7 @@ body {
    border: solid 1px;
    width: 200px;
    word-wrap: break-word;
+   position: relative
 }
 
 .badge-primary {
@@ -58,14 +59,20 @@ body {
 }
 
 .close-task {
-   padding: 0px;
-   margin: 0px;
+   padding: 0;
+   margin: 0;
+   position:absolute;
+   top:-9px;
+   right:1px;
+   cursor: pointer;
+   color:#e84343;
 }
 .active-task-item{
    border: solid 3px;
    border-color: rgb( 255, 0, 0);
    border-color: rgba( 255, 0, 0, 0.5);
    width: 200px;
+   position: relative
 }
 
 /* кнопка для добавления задач */
@@ -97,7 +104,6 @@ body {
 }
 
 .task-description {
-   /* border: solid 1px; */
    width: 10%;
 }
 

@@ -24,6 +24,7 @@ function chooseActiveTask(e) {
    $(".active-task-item").attr("class", "task-item");
    var newActiveTask = $(e.target).closest(".task-item");
    newActiveTask.attr("class", "active-task-item");
+
    var newActiveTaskName = newActiveTask.find(".task-name").text();
    if (newActiveTaskName !== activeTask) {
       $(".active-task h1").text(newActiveTaskName);
@@ -34,18 +35,25 @@ function chooseActiveTask(e) {
 
 function addTask() {
    var newTask = prompt('Введите задачу');
-   $(".task-item:last").clone(true).appendTo(".task-list");
-   $(".task-item:last .task-name").text(newTask);
+   $(".task-list li:first")
+      .clone(true)
+      .appendTo(".task-list");
+   $(".task-list li:last .task-name").text(newTask);
+   $(".task-list li:last").attr("class", "task-item");
 }
-
 
 function deleteTask(e) {
    if ($(".task-list li").length === 1) {
       alert("в списке должна оставаться хотябы одна задача");
       return;
    }
-   var task = $(e.target);
-   task.parent().remove();
+   var task = $(e.target).parent();
+   if (task.find(".task-name").text() === activeTask){
+      activeTask = DEFAULT_TASK;
+      $(".active-task h1").text(activeTask);
+      stopTimer();
+   }
+   task.remove();
 }
 
 function endTask() {
