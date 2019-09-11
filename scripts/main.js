@@ -67,7 +67,7 @@ function endTask() {
 function setTime(time){
   var countdown = new Date(time);
   $(".timer")
-     .html("<div>" + countdown.getMinutes() +
+     .html("<div>" + ('0'+countdown.getMinutes()).slice(-2) +
         ":" + ('0'+countdown.getSeconds()).slice(-2) + "</div>");
 }
 
