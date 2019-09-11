@@ -2,7 +2,7 @@
 // фаза выбора задачи, рабочая фаза = 25 минут работы cчетчика,
 //фаза отдыха = 5 - 20 минут работы счетчика
 'use strict';
-// const TIME_TO_WORK = 14000;
+// const TIME_TO_WORK = 15000;
 // const TIME_TO_LITTLE_REST = 15000;
 // const TIME_TO_BIG_REST = 15000;
 const TIME_TO_WORK = 1500000; //25 минут в мс
@@ -68,7 +68,7 @@ function setTime(time){
   var countdown = new Date(time);
   $(".timer")
      .html("<div>" + countdown.getMinutes() +
-        ":" + countdown.getSeconds() + "</div>");
+        ":" + ('0'+countdown.getSeconds()).slice(-2) + "</div>");
 }
 
 function startTimer() {
