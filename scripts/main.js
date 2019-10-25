@@ -1,10 +1,4 @@
-// разделить работу приложения на 3 фазы
-// фаза выбора задачи, рабочая фаза = 25 минут работы cчетчика,
-//фаза отдыха = 5 - 20 минут работы счетчика
 'use strict';
-// const TIME_TO_WORK = 15000;
-// const TIME_TO_LITTLE_REST = 15000;
-// const TIME_TO_BIG_REST = 15000;
 const TIME_TO_WORK = 1500000; //25 минут в мс
 const TIME_TO_LITTLE_REST = 300000; // 5 минут в милисекундах
 const TIME_TO_BIG_REST = 900000; // 15 минут в мс
@@ -72,6 +66,9 @@ function setTime(time){
 }
 
 function startTimer() {
+   //если таймер запущен, дубликат функции таймера не запускается
+   if (activePhase === PHASE_WORK) return;
+
    if (activeTask === DEFAULT_TASK) {
       alert('Сначала выберите задачу, которую будете выполнять');
       return
