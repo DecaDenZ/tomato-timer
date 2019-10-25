@@ -42,7 +42,7 @@ function deleteTask(e) {
       return;
    }
    var task = $(e.target).parent();
-   if (task.find(".task-name").text() === activeTask){
+   if (task.find(".task-name").text() === activeTask) {
       activeTask = DEFAULT_TASK;
       $(".active-task h1").text(activeTask);
       stopTimer();
@@ -54,15 +54,21 @@ function deleteTask(e) {
 function endTask() {
    activeTask = DEFAULT_TASK;
    $(".active-task h1").text(activeTask);
-   $(".active-task-item").remove();
+   
+   if ($(".task-list li").length === 1) {
+      alert("в списке должна оставаться хотябы одна задача");
+   } else {
+      $(".active-task-item").remove();
+   }
+
    setTime(TIME_TO_WORK);
 }
 
-function setTime(time){
-  var countdown = new Date(time);
-  $(".timer")
-     .html("<div>" + ('0'+countdown.getMinutes()).slice(-2) +
-        ":" + ('0'+countdown.getSeconds()).slice(-2) + "</div>");
+function setTime(time) {
+   var countdown = new Date(time);
+   $(".timer")
+      .html("<div>" + ('0' + countdown.getMinutes()).slice(-2) +
+         ":" + ('0' + countdown.getSeconds()).slice(-2) + "</div>");
 }
 
 function startTimer() {
